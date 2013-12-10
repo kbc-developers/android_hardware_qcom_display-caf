@@ -8,6 +8,10 @@ common_includes += hardware/qcom/display-caf/libexternal
 common_includes += hardware/qcom/display-caf/libqservice
 common_includes += hardware/qcom/display-caf/libvirtual
 
+ifeq ($(QCOM_BSP_WITH_GENLOCK),true)
+    common_includes += hardware/qcom/display-caf/libgenlock
+endif
+
 common_header_export_path := qcom/display
 
 #Common libraries external to display-caf HAL
