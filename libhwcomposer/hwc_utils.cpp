@@ -151,6 +151,7 @@ static int ppdComm(const char* cmd, hwc_context_t *ctx) {
         }
     }
     ALOGD_IF(HWC_UTILS_DEBUG, "%s: Sent command: %s", __FUNCTION__, cmd);
+
     return 0;
 }
 
