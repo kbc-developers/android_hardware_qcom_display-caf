@@ -263,7 +263,6 @@ enum eMdpFlags {
     OV_MDP_SECURE_OVERLAY_SESSION = MDP_SECURE_OVERLAY_SESSION,
     OV_MDP_SECURE_DISPLAY_OVERLAY_SESSION = MDP_SECURE_DISPLAY_OVERLAY_SESSION,
     OV_MDP_SOURCE_ROTATED_90 = MDP_SOURCE_ROTATED_90,
-    OV_MDP_BACKEND_COMPOSITION = MDP_BACKEND_COMPOSITION,
     OV_MDP_BLEND_FG_PREMULT = MDP_BLEND_FG_PREMULT,
     OV_MDP_FLIP_H = MDP_FLIP_LR,
     OV_MDP_FLIP_V = MDP_FLIP_UD,
@@ -272,6 +271,7 @@ enum eMdpFlags {
     OV_MDSS_MDP_BWC_EN = MDP_BWC_EN,
     OV_MDSS_MDP_DUAL_PIPE = MDSS_MDP_DUAL_PIPE,
     OV_MDP_SOLID_FILL = MDP_SOLID_FILL,
+    OV_MDP_SMP_FORCE_ALLOC = MDP_SMP_FORCE_ALLOC,
 };
 
 enum eZorder {
@@ -696,6 +696,14 @@ inline void even_floor(T& value) {
         value--;
 }
 
+/* Prerotation adjusts crop co-ordinates to the new transformed values within
+ * destination buffer. This is necessary only when the entire buffer is rotated
+ * irrespective of crop (A-family). If only the crop portion of the buffer is
+ * rotated into a destination buffer matching the size of crop, we don't need to
+ * use this helper (B-family).
+ * @Deprecated as of now, retained for the case where a full buffer needs
+ * transform and also as a reference.
+ */
 void preRotateSource(const eTransform& tr, Whf& whf, Dim& srcCrop);
 void getDump(char *buf, size_t len, const char *prefix, const mdp_overlay& ov);
 void getDump(char *buf, size_t len, const char *prefix, const msmfb_img& ov);
